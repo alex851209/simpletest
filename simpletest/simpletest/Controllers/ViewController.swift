@@ -11,10 +11,14 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    let provider = ProductProvider()
+    var elements = [SalePageListElement]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTableView()
+        fetchProducts()
     }
 
     private func configureTableView() {
@@ -22,11 +26,19 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    private func fetchProducts() {
+        
+        provider.fetchElements { elements in
+            self.elements = elements
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 2 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return elements.count }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 150 }
     
@@ -36,7 +48,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let reuseID = String(describing: ProductCell.self)
         
         if let productCell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) as? ProductCell {
-            productCell.layoutCell()
+            productCell.layoutCell(with: elements[indexPath.row])
             return productCell
         }
         return cell
