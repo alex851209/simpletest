@@ -11,16 +11,29 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func orderSegmentedDidChoose(_ sender: UISegmentedControl) { configureOrder(sender) }
+    @IBAction func sortSegmentedDidChoose(_ sender: UISegmentedControl) { toggleElementsSort(sender) }
+    @IBAction func soldOutSwitchDidTap(_ sender: UISwitch) {
+        
+        isSoldOut = sender.isOn
+        toggleElementsFilter()
+    }
+    @IBAction func comingSoonSwitchDidTap(_ sender: UISwitch) {
+        
+        isComingSoon = sender.isOn
+        toggleElementsFilter()
+    }
     
     let provider = ProductProvider()
     var elements = [SalePageListElement]()
+    var filteredElements = [SalePageListElement]()
+    var isSoldOut = false
+    var isComingSoon = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTableView()
-        fetchProducts()
+        fetchElements()
     }
 
     private func configureTableView() {
@@ -29,7 +42,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    private func fetchProducts() {
+    private func fetchElements() {
         
         provider.fetchElements { elements in
             self.elements = elements
@@ -37,7 +50,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private func configureOrder(_ sender: UISegmentedControl) {
+    private func toggleElementsSort(_ sender: UISegmentedControl) {
         
         elements = elements.sorted {
             var isSorted = false
@@ -59,11 +72,23 @@ class ViewController: UIViewController {
         }
         tableView.reloadData()
     }
+    
+    private func toggleElementsFilter() {
+        
+        filteredElements = elements.filter {
+            $0.isSoldOut == isSoldOut && $0.isComingSoon == isComingSoon
+        }
+        tableView.reloadData()
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return elements.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let isFiltered = isSoldOut == true || isComingSoon == true
+        return isFiltered ? filteredElements.count : elements.count
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 150 }
     
@@ -73,7 +98,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let reuseID = String(describing: ProductCell.self)
         
         if let productCell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) as? ProductCell {
-            productCell.layoutCell(with: elements[indexPath.row])
+            let isFiltered = isSoldOut == true || isComingSoon == true
+            let layoutElements = isFiltered ? filteredElements[indexPath.row] : elements[indexPath.row]
+            
+            productCell.layoutCell(with: layoutElements)
             return productCell
         }
         return cell
