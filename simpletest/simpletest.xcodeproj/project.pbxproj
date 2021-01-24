@@ -20,6 +20,7 @@
 		A58A413325BC64B800DA8A68 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A413225BC64B800DA8A68 /* CategoryList.swift */; };
 		A58A413825BC681500DA8A68 /* SalePageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A413725BC681500DA8A68 /* SalePageList.swift */; };
 		A58A413E25BC7F2F00DA8A68 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A413D25BC7F2F00DA8A68 /* Date+Ext.swift */; };
+		A58A414625BD73A200DA8A68 /* ElementRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A414525BD73A200DA8A68 /* ElementRequest.swift */; };
 		A5BEC56025BC5B6D00E3A746 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BEC55F25BC5B6D00E3A746 /* ProductCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		A58A413225BC64B800DA8A68 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		A58A413725BC681500DA8A68 /* SalePageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalePageList.swift; sourceTree = "<group>"; };
 		A58A413D25BC7F2F00DA8A68 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		A58A414525BD73A200DA8A68 /* ElementRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementRequest.swift; sourceTree = "<group>"; };
 		A5BEC55F25BC5B6D00E3A746 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				A58A410F25BC611400DA8A68 /* ProductProvider.swift */,
+				A58A414525BD73A200DA8A68 /* ElementRequest.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				6CFCACD225B1D4BF00080A64 /* ViewController.swift in Sources */,
 				A5BEC56025BC5B6D00E3A746 /* ProductCell.swift in Sources */,
 				6CFCACCE25B1D4BF00080A64 /* AppDelegate.swift in Sources */,
+				A58A414625BD73A200DA8A68 /* ElementRequest.swift in Sources */,
 				A58A413825BC681500DA8A68 /* SalePageList.swift in Sources */,
 				6CFCACD025B1D4BF00080A64 /* SceneDelegate.swift in Sources */,
 				A58A412B25BC626C00DA8A68 /* ErrorMessage.swift in Sources */,

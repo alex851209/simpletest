@@ -25,8 +25,7 @@ class ProductProvider {
     
     private func fetchID() {
      
-        let urlString = "https://blooming-oasis-01056.herokuapp.com/category"
-        guard let url = URL(string: urlString) else {
+        guard let url = URL(string: ElementRequest.id.path) else {
             print(ErrorMessage.invalidURL.rawValue)
             return
         }
@@ -62,8 +61,7 @@ class ProductProvider {
     private func fetchInfo() {
         
         for id in ids {
-            let urlString = "https://blooming-oasis-01056.herokuapp.com/product?id=\(id)"
-            guard let url = URL(string: urlString) else {
+            guard let url = URL(string: ElementRequest.info(id: id).path) else {
                 print(ErrorMessage.invalidURL.rawValue)
                 return
             }
@@ -100,8 +98,7 @@ class ProductProvider {
     private func fetchStatus() {
         
         for id in ids {
-            let urlString = "https://blooming-oasis-01056.herokuapp.com/sale?id=\(id)"
-            guard let url = URL(string: urlString) else {
+            guard let url = URL(string: ElementRequest.status(id: id).path) else {
                 print(ErrorMessage.invalidURL.rawValue)
                 return
             }
