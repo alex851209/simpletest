@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBAction func sortSegmentedDidChoose(_ sender: UISegmentedControl) { toggleElementsSort(sender) }
     @IBAction func soldOutSwitchDidTap(_ sender: UISwitch) {
@@ -44,9 +45,11 @@ class ViewController: UIViewController {
     
     private func fetchElements() {
         
+        activityIndicator.startAnimating()
         provider.fetchElements { elements in
             self.elements = elements
             self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
         }
     }
     
