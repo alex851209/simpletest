@@ -26,6 +26,8 @@ class ProductCell: UITableViewCell {
         
         let convertDate = Date().convertDate(dateValue: startDateTime)
         
+        priceLabel.textColor = price > 200 ? .red : .black
+        
         titleLabel.text = "名稱：\(title)"
         priceLabel.text = "售價：\(price)"
         suggestedPriceLabel.text = "建議售價：\(suggestPrice)"

@@ -11,6 +11,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func orderSegmentedDidChoose(_ sender: UISegmentedControl) { configureOrder(sender) }
+    
     let provider = ProductProvider()
     var elements = [SalePageListElement]()
     
@@ -33,6 +35,29 @@ class ViewController: UIViewController {
             self.elements = elements
             self.tableView.reloadData()
         }
+    }
+    
+    private func configureOrder(_ sender: UISegmentedControl) {
+        
+        elements = elements.sorted {
+            var isSorted = false
+            
+            guard let firstPrice = $0.price,
+                  let secondPrice = $1.price,
+                  let firstSellingDate = $0.sellingStartDateTime,
+                  let secondSellingDate = $1.sellingStartDateTime
+            else { return isSorted }
+            
+            switch sender.selectedSegmentIndex {
+            case 0: isSorted = firstPrice > secondPrice
+            case 1: isSorted = firstPrice < secondPrice
+            case 2: isSorted = firstSellingDate > secondSellingDate
+            case 3: isSorted = firstSellingDate < secondSellingDate
+            default: break
+            }
+            return isSorted
+        }
+        tableView.reloadData()
     }
 }
 
